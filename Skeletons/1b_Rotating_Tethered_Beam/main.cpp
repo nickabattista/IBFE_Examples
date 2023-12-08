@@ -70,7 +70,7 @@
 //
 // Elasticity model data by AP Hoover (~2015)
 //
-//--------------------------------------------------------------------
+//--------------------------------------------------------------------å
 namespace ModelData
 {
 // Problem parameters.
@@ -88,38 +88,20 @@ target_force_function(
     const std::vector<const std::vector<VectorValue<double> >*>& /*grad_var_data*/,
     double time,
 	void* /*ctx*/)
-{
-    //VectorValue<double>& F,
-    //const TensorValue<double>& /*FF*/,
-    //const libMesh::Point& X,
-    //const libMesh::Point& s,
-    //Elem* const /*elem*/,
-    //const vector<NumericVector<double>*>& /*system_data*/,
-    //double time,
-    //void* /*ctx*/)
-    
-  if(s(0)>0.0){
-  libMesh::Point s_dump;			//s_dump is the target point position
-    if(time<1.0)      				//This will move the beam up with a speed of 0.5 from 0<t<1
+ {
+  libMesh::Point s_dump;
+    if(time<1)      
 	{
-	  s_dump(1)=s(1)+0.5*time;		//only change the y-coordinate. s(1) is the x-coordinate of the reference 
-	  s_dump(0)=s(0);				//s(0) is the x-coordinate of the reference configuration
+    s_dump(1)=s(1)+s(0)*sin(2*3.14*0.25*time);
+    s_dump(0)=s(0)*cos(2*3.14*0.25*time);
 	}
-    else if(time<3.0)				//This will move the beam down with a speed of -0.5 for 1<t<3
-	{
-	  s_dump(1)=s(1)+0.5+0.5*(1.0-time);
-	  s_dump(0)=s(0);
-	}
-    else 							//set the target point location to the actual location of the boundary (X) to make force equal to zero.
+
+    else
       {
 	  s_dump(1)=X(1);
 	  s_dump(0)=X(0);
       }
-      F = kappa_s*(s_dump-X);		//apply a target force equal to kappa_s times the difference between tether and actual positions.
-}
- else{
-   F.zero();
- }
+      F = kappa_s*(s_dump-X);
     return;
 }
 
@@ -371,9 +353,9 @@ main(
         {
             time_integrator->registerVisItDataWriter(visit_data_writer);
         }
-	// From UNC --> UA modification!
+        // From circa 2016 UNC version --> autoibamr (Dec 2023) version!
         //AutoPtr<ExodusII_IO> exodus_io(uses_exodus ? new ExodusII_IO(mesh) : NULL);
-	std::unique_ptr<ExodusII_IO> exodus_io(uses_exodus ? new ExodusII_IO(mesh) : NULL);
+        std::unique_ptr<ExodusII_IO> exodus_io(uses_exodus ? new ExodusII_IO(mesh) : NULL);                
 
         // Initialize hierarchy configuration and data on all patches.
         ib_method_ops->initializeFEData();
