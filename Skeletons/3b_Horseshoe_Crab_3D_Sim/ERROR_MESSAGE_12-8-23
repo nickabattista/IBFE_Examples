@@ -1,0 +1,58 @@
+NOTE: 
+    [1] commented out all mentions of the "postprocess_data" function (~lines 186-195, 500-513, 544-695)
+    [2] having done that, code can be run.
+
+******************************************************************************************
+*                              ERRORS ARE LISTED ARE BELOW
+* It appears to be an issue going from: 
+*                "AutoPtr<ExodusII_IO> exodus_io(uses_exodus ? new ExodusII_IO(mesh) : NULL);"
+*                                           to
+*                "std::unique_ptr<ExodusII_IO> exodus_io(uses_exodus ? new ExodusII_IO(mesh) : NULL);"
+*                                       -NAB (12/8/2023)
+******************************************************************************************
+
+/home/hpc/battistn/IBFE_Examples/3b_Horseshoe_Crab_3D_Sim/main.cpp: In function ?void postprocess_data(SAMRAI::tbox::Pointer<SAMRAI::hier::PatchHierarchy<3> >, SAMRAI::tbox::Pointer<IBAMR::INSHierarchyIntegrat
+or>, libMesh::Mesh&, libMesh::EquationSystems*, int, double, const string&)?:
+/home/hpc/battistn/IBFE_Examples/3b_Horseshoe_Crab_3D_Sim/main.cpp:559:96: error: cannot call member function ?const string& IBAMR::FEMechanicsBase::getForceSystemName() const? without object
+  559 |         System& F_system = equation_systems->get_system<System>(IBFEMethod::getForceSystemName());
+      |                                                                                                ^
+/home/hpc/battistn/IBFE_Examples/3b_Horseshoe_Crab_3D_Sim/main.cpp:560:99: error: cannot call member function ?const string& IBAMR::FEMechanicsBase::getVelocitySystemName() const? without object
+  560 |         System& U_system = equation_systems->get_system<System>(IBFEMethod::getVelocitySystemName());
+      |                                                                                                   ^
+/home/hpc/battistn/IBFE_Examples/3b_Horseshoe_Crab_3D_Sim/main.cpp:572:9: error: ?AutoPtr? was not declared in this scope
+  572 |         AutoPtr<FEBase> fe(FEBase::build(dim, F_dof_map.variable_type(0)));
+      |         ^~~~~~~
+/home/hpc/battistn/IBFE_Examples/3b_Horseshoe_Crab_3D_Sim/main.cpp:572:23: error: expected primary-expression before ?>? token
+  572 |         AutoPtr<FEBase> fe(FEBase::build(dim, F_dof_map.variable_type(0)));
+      |                       ^
+/home/hpc/battistn/IBFE_Examples/3b_Horseshoe_Crab_3D_Sim/main.cpp:572:25: error: ?fe? was not declared in this scope
+  572 |         AutoPtr<FEBase> fe(FEBase::build(dim, F_dof_map.variable_type(0)));
+      |                         ^~
+/home/hpc/battistn/IBFE_Examples/3b_Horseshoe_Crab_3D_Sim/main.cpp:573:22: error: expected primary-expression before ?>? token
+  573 |         AutoPtr<QBase> qrule = QBase::build(QGAUSS, dim, FIFTH);
+      |                      ^
+/home/hpc/battistn/IBFE_Examples/3b_Horseshoe_Crab_3D_Sim/main.cpp:573:24: error: ?qrule? was not declared in this scope
+  573 |         AutoPtr<QBase> qrule = QBase::build(QGAUSS, dim, FIFTH);
+      |                        ^~~~~
+/home/hpc/battistn/IBFE_Examples/3b_Horseshoe_Crab_3D_Sim/main.cpp:634:99: error: cannot call member function ?const string& IBAMR::FEMechanicsBase::getVelocitySystemName() const? without object
+  634 |         System& U_system = equation_systems->get_system<System>(IBFEMethod::getVelocitySystemName());
+      |                                                                                                   ^
+/home/hpc/battistn/IBFE_Examples/3b_Horseshoe_Crab_3D_Sim/main.cpp:640:9: error: ?AutoPtr? was not declared in this scope
+  640 |         AutoPtr<FEBase> fe(FEBase::build(dim, U_dof_map.variable_type(0)));
+      |         ^~~~~~~
+/home/hpc/battistn/IBFE_Examples/3b_Horseshoe_Crab_3D_Sim/main.cpp:640:23: error: expected primary-expression before ?>? token
+  640 |         AutoPtr<FEBase> fe(FEBase::build(dim, U_dof_map.variable_type(0)));
+      |                       ^
+/home/hpc/battistn/IBFE_Examples/3b_Horseshoe_Crab_3D_Sim/main.cpp:640:25: error: ?fe? was not declared in this scope
+  640 |         AutoPtr<FEBase> fe(FEBase::build(dim, U_dof_map.variable_type(0)));
+      |                         ^~
+/home/hpc/battistn/IBFE_Examples/3b_Horseshoe_Crab_3D_Sim/main.cpp:641:22: error: expected primary-expression before ?>? token
+  641 |         AutoPtr<QBase> qrule = QBase::build(QGAUSS, dim, FIFTH);
+      |                      ^
+/home/hpc/battistn/IBFE_Examples/3b_Horseshoe_Crab_3D_Sim/main.cpp:641:24: error: ?qrule? was not declared in this scope
+  641 |         AutoPtr<QBase> qrule = QBase::build(QGAUSS, dim, FIFTH);
+      |                        ^~~~~
+make[3]: *** [CMakeFiles/main3d.dir/build.make:76: CMakeFiles/main3d.dir/main.cpp.o] Error 1
+make[2]: *** [CMakeFiles/Makefile2:83: CMakeFiles/main3d.dir/all] Error 2
+make[1]: *** [CMakeFiles/Makefile2:90: CMakeFiles/main3d.dir/rule] Error 2
+make: *** [Makefile:124: main3d] Error 2
