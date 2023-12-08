@@ -1,0 +1,60 @@
+******************************************************************************************
+*                              ERRORS ARE LISTED ARE BELOW
+*                       >>>> It appears to be a mesh issue <<<<
+*                                  -NAB (12/8/2023)
+******************************************************************************************
+
+P=00000:Program abort called in file ``/home/hpc/battistn/autoibamr/tmp/unpack/IBAMR-0.13.0/src/IB/FEMechanicsBase.cpp'' at line 1550
+P=00000:ERROR MESSAGE:
+P=00000:IBAMR requires that the Jacobian of each element must be positive, but
+P=00000:the present element has at least one point at which the Jacobian is
+P=00000:either negative or zero. This is a stronger requirement than what
+P=00000:libMesh imposes due to some additional internal assumptions about
+P=00000:the orientation of elements inside IBAMR.
+P=00000:
+P=00000:Here's libMesh's available information on this element:
+P=00000:
+P=00000:  Elem Information
+P=00000:   id()=0, unique_id()=871, processor_id()=0
+P=00000:   type()=TRI3
+P=00000:   dim()=2
+P=00000:   n_nodes()=3
+P=00000:    0  Node id()=0, processor_id()=0, Point=(x,y,z)=(0.184955, 0.230693,        0)
+P=00000:    DoFs=
+P=00000:    1  Node id()=1, processor_id()=0, Point=(x,y,z)=(0.170262, 0.239337,        0)
+P=00000:    DoFs=
+P=00000:    2  Node id()=2, processor_id()=0, Point=(x,y,z)=(0.188319, 0.244532,        0)
+P=00000:    DoFs=
+P=00000:   n_sides()=3
+P=00000:    neighbor(0)=482
+P=00000:    neighbor(1)=1
+P=00000:    neighbor(2)=669
+P=00000:   hmin()=0.0142417, hmax()=0.0187892
+P=00000:   volume()=0.000116204
+P=00000:   active()=1, ancestor()=0, subactive()=0, has_children()=0
+P=00000:   parent()=nullptr
+P=00000:   level()=0, p_level()=0
+P=00000:   refinement_flag()=DO_NOTHING
+P=00000:   p_refinement_flag()=DO_NOTHING
+P=00000:   DoFs=
+P=00000:
+P=00000:To get around this error, you will need to edit the problematic mesh
+P=00000:either by hand or with a CAD program.
+[node079:352858] *** Process received signal ***
+[node079:352858] Signal: Aborted (6)
+[node079:352858] Signal code:  (-6)
+[node079:352858] [ 0] /lib64/libpthread.so.0(+0x12cf0)[0x7f743042acf0]
+[node079:352858] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x7f742ee51acf]
+[node079:352858] [ 2] /lib64/libc.so.6(abort+0x127)[0x7f742ee24ea5]
+[node079:352858] [ 3] /home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/lib64/libIBTK2d.so(+0x20e869)[0x7f7435868869]
+[node079:352858] [ 4] /home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/lib64/libIBAMR2d.so(_ZN5IBAMR15FEMechanicsBase17commonConstructorERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKN6SAMRAI4tbox7
+PointerINSA_8DatabaseEEERKSt6vectorIPN7libMesh8MeshBaseESaISJ_EEbS8_j+0x552)[0x7f7436ab9792]
+[node079:352858] [ 5] /home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/lib64/libIBAMR2d.so(_ZN5IBAMR15FEMechanicsBaseC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKN6SAMRAI4tbox7PointerINSA_8Data
+baseEEEPN7libMesh8MeshBaseEbS8_j+0x3f3)[0x7f7436abb9a3]
+[node079:352858] [ 6] /home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/lib64/libIBAMR2d.so(_ZN5IBAMR10IBFEMethodC1ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEERKN6SAMRAI4tbox7PointerINSA_8DatabaseE
+EEPN7libMesh8MeshBaseEibS8_j+0x50)[0x7f7436b1c8d0]
+[node079:352858] [ 7] ./main2d[0x457a44]
+[node079:352858] [ 8] /lib64/libc.so.6(__libc_start_main+0xe5)[0x7f742ee3dd85]
+[node079:352858] [ 9] ./main2d[0x459c4e]
+[node079:352858] *** End of error message ***
+/var/spool/slurm/d/job1597961/slurm_script: line 19: 352858 Aborted                 (core dumped) ./main2d input2d
