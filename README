@@ -11,20 +11,27 @@
 *   AUTOIBAMR: https://github.com/IBAMR/autoibamr/blob/master/README.md
 *   IBAMR:     https://ibamr.github.io/
 *
+*   Laura Miller: https://sites.google.com/site/swimflypump/people/LauraMiller
+*   Alex Hoover:  https://sites.google.com/view/alexanderphoover/home
+* 
 *****************************************************************************
 *****************************************************************************
-
 
 #------------------------------------------------------------------
 #          INSTALLING AUTOIBAMR (on SLURM SYSTEM, Dec 2023):
 #------------------------------------------------------------------
+
     [1] make sure a git module is loaded, e.g.,
                 module load git
-    [1] git clone https://github.com/ibamr/autoibamr.git
-    [2] cd autoibamr
-    [3] make sure an mpi module is loaded, e.g.,
+
+    [2] git clone https://github.com/ibamr/autoibamr.git
+
+    [3] cd autoibamr
+
+    [4] make sure an mpi module is loaded, e.g.,
                 module load mpi 
-    [4a] make sure you have a submit.sh script for job, with the following:
+
+    [5a] make sure you have a submit.sh script for job, with the following:
 
                 #!/bin/bash
 
@@ -43,7 +50,7 @@
                 ./autoibamr.sh
                 echo "Completed @ "`date`
 
-    [4b] if, you do, run in terminal:
+    [5b] if, you do, run in terminal:
             sbatch submit.sh
 
 #------------------------------------------------------------------
@@ -80,6 +87,28 @@
     [6] run in terminal:
             make main2d
 
+    [7a] make sure you have a submit.sh script for job, with the following:
+
+                #!/bin/bash
+
+                #SBATCH --account=nlscience
+                #SBATCH --chdir=./ # Working directory
+                #SBATCH --mail-user=battistn@tcnj.edu # Who to send emails to
+                #SBATCH --mail-type=ALL             # Send emails on start, end and failure
+                #SBATCH --job-name=IBFE_1a          # Job name
+                #SBATCH --output=job.%j.out         # Name of stdout output file (%j expands to jobId)
+                #SBATCH --nodes=1                   # Total number of nodes (a.k.a. servers) requested
+                #SBATCH --ntasks=1                  # Total number of mpi tasks requested
+                #SBATCH --partition=normal          # Partition (a.k.a.queue) to use
+
+                # Launch a serial job
+                echo "Starting @ "`date`
+                ./main2d input2d
+                echo "Completed @ "`date`
+
+    [7b] if, you do, run in terminal:
+            sbatch submit.sh
+
 #----------------------------------------------------------------------------
 #      EXAMPLE MODIFICATIONS FROM OLDER NON-AUTOIBAMR VERSIONS!!!!!
 #               (make sure the following changes were made)
@@ -93,7 +122,7 @@
         //#include <IBAMR_config.h>
         //#include <IBTK_config.h>
 
-    [3] make sure following following modification was made (~line 270):
+    [3] make sure following following modification was made (~line 370):
 
         // From circa 2016 UNC version --> autoibamr (Dec 2023) version!
         //AutoPtr<ExodusII_IO> exodus_io(uses_exodus ? new ExodusII_IO(mesh) : NULL);
