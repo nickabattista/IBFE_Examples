@@ -1,0 +1,100 @@
+
+*****************************************************************************
+*****************************************************************************
+*
+* These examples were created by Alex Hoover (~2015) and then painstakingly 
+* maintained and updated throughout the years (2015-2023) by Laura Miller. 
+*
+*   Currently (and only slightly modified) by NAB for use with TCNJ's ELSA
+*         after installing using "autoibamr"
+*
+*   AUTOIBAMR: https://github.com/IBAMR/autoibamr/blob/master/README.md
+*   IBAMR:     https://ibamr.github.io/
+*
+*****************************************************************************
+*****************************************************************************
+
+
+#------------------------------------------------------------------
+#          INSTALLING AUTOIBAMR (on SLURM SYSTEM, Dec 2023):
+#------------------------------------------------------------------
+    [1] make sure a git module is loaded, e.g.,
+                module load git
+    [1] git clone https://github.com/ibamr/autoibamr.git
+    [2] cd autoibamr
+    [3] make sure an mpi module is loaded, e.g.,
+                module load mpi 
+    [4a] make sure you have a submit.sh script for job, with the following:
+
+                #!/bin/bash
+
+                #SBATCH --account=nlscience
+                #SBATCH --chdir=./ # Working directory
+                #SBATCH --mail-user=battistn@tcnj.edu # Who to send emails to
+                #SBATCH --mail-type=ALL             # Send emails on start, end and failure
+                #SBATCH --job-name=IBAMR            # Job name
+                #SBATCH --output=job.%j.out         # Name of stdout output file (%j expands to jobId)
+                #SBATCH --nodes=1                   # Total number of nodes (a.k.a. servers) requested
+                #SBATCH --ntasks=1                  # Total number of mpi tasks requested
+                #SBATCH --partition=normal          # Partition (a.k.a.queue) to use
+
+                # Launch a serial job
+                echo "Starting @ "`date`
+                ./autoibamr.sh
+                echo "Completed @ "`date`
+
+    [4b] if, you do, run in terminal:
+            sbatch submit.sh
+
+#------------------------------------------------------------------
+#                       RUNNING EXAMPLES:
+#------------------------------------------------------------------
+
+    [1] upload particular example :)
+
+    [2] "cd" to example directory
+
+    [3] create CMakeList.txt script with the following:
+        (see https://ibamr.github.io/linking for more information)
+
+                PROJECT(mysolver)
+                CMAKE_MINIMUM_REQUIRED(VERSION 3.15.0)
+
+                # List your source files here - this example has just one.
+                SET(SOURCE_FILES main.cpp)
+                ADD_EXECUTABLE(main2d ${SOURCE_FILES})
+
+                FIND_PACKAGE(IBAMR 0.13.0 REQUIRED)
+                TARGET_LINK_LIBRARIES(main2d IBAMR::IBAMR2d)
+                #TARGET_LINK_LIBRARIES(main3d IBAMR::IBAMR3d) # If 3D simulation
+
+                # IBAMR saves the flags it used to compile - you can reuse them if you want to
+                SET(CMAKE_CXX_FLAGS ${IBAMR_CXX_FLAGS})
+
+    [4] run in terminal:
+            source ~/autoibamr/configuration/enable.sh
+
+    [5] run in terminal:
+            cmake -DIBAMR_ROOT="${IBAMR_ROOT}" .
+
+    [6] run in terminal:
+            make main2d
+
+#----------------------------------------------------------------------------
+#      EXAMPLE MODIFICATIONS FROM OLDER NON-AUTOIBAMR VERSIONS!!!!!
+#               (make sure the following changes were made)
+#----------------------------------------------------------------------------
+
+    [1] make sure "main.C" renamed to "main.cpp" (for autoibamr) <<<<<<<
+
+    [2] make sure following lines are commented out in main.cpp file:
+
+        // Config files (near line 61 in main.cpp)
+        //#include <IBAMR_config.h>
+        //#include <IBTK_config.h>
+
+    [3] make sure following following modification was made (~line 270):
+
+        // From circa 2016 UNC version --> autoibamr (Dec 2023) version!
+        //AutoPtr<ExodusII_IO> exodus_io(uses_exodus ? new ExodusII_IO(mesh) : NULL);
+        std::unique_ptr<ExodusII_IO> exodus_io(uses_exodus ? new ExodusII_IO(mesh) : NULL);                
