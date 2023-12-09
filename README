@@ -1,9 +1,9 @@
 
-*****************************************************************************
-*****************************************************************************
+************************************************************************************************
+************************************************************************************************
 *
-* These examples were created by Alex Hoover (~2015) and then painstakingly 
-* maintained and updated throughout the years (2015-2023) by Laura Miller. 
+* These examples were created by Alex Hoover (~2015) and then maintained
+*         and updated throughout the years by Laura Miller (2015-2023). 
 *
 *   Currently (and only slightly modified) by NAB for use with TCNJ's ELSA
 *         after installing using "autoibamr"
@@ -14,8 +14,8 @@
 *   Laura Miller: https://sites.google.com/site/swimflypump/people/LauraMiller
 *   Alex Hoover:  https://sites.google.com/view/alexanderphoover/home
 * 
-*****************************************************************************
-*****************************************************************************
+************************************************************************************************
+************************************************************************************************
 
 #------------------------------------------------------------------
 #          INSTALLING AUTOIBAMR (on SLURM SYSTEM, Dec 2023):
