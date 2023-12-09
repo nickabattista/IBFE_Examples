@@ -254,7 +254,7 @@ main(
     //---------------------------------------------------------
     // READ IN MESH!!!
     //---------------------------------------------------------
-	mesh.read("triangle.msh");
+	mesh.read("nb_triangle.msh");
 	mesh.prepare_for_use();
         // Create major algorithm and data objects that comprise the
         // application.  These objects are configured from the input database

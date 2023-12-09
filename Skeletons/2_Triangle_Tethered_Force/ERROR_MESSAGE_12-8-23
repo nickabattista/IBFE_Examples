@@ -1,8 +1,13 @@
-******************************************************************************************
+*************************************************************************************************
 *                              ERRORS ARE LISTED ARE BELOW
 *                       >>>> It appears to be a mesh issue <<<<
 *                                  -NAB (12/8/2023)
-******************************************************************************************
+*
+* Update:
+*        [1] Using gmsh v3.0.6, NAB recreated a triangle with vertices: {(0,0),(0,0.25),(0.25,0)}
+*               with a mesh element size of 1/64 = 0.015625 and the sim runs...
+*
+*************************************************************************************************
 
 P=00000:Program abort called in file ``/home/hpc/battistn/autoibamr/tmp/unpack/IBAMR-0.13.0/src/IB/FEMechanicsBase.cpp'' at line 1550
 P=00000:ERROR MESSAGE:
