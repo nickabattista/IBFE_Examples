@@ -6,8 +6,8 @@
 #SBATCH --mail-type=ALL             # Send emails on start, end and failure
 #SBATCH --job-name=IBFE_3b          # Job name
 #SBATCH --output=job.%j.out         # Name of stdout output file (%j expands to jobId)
-#SBATCH --nodes=16                  # Total number of nodes (a.k.a. servers) requested
-#SBATCH --ntasks=1                  # Total number of mpi tasks requested
+#SBATCH --nodes=2                   # Total number of nodes (a.k.a. servers) requested
+#SBATCH --ntasks=16                 # Total number of mpi tasks requested
 #SBATCH --partition=normal          # Partition (a.k.a.queue) to use
 #SBATCH --requeue                   # restart flag if HPC goes down
 
