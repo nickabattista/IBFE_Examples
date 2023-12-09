@@ -207,11 +207,13 @@ main(
         
 	Mesh mesh(init.comm(), NDIM);
 	//Mesh mesh(NDIM);
-        const double dx = input_db->getDouble("DX");
-        const double ds = input_db->getDouble("MFAC")*dx;
+    const double dx = input_db->getDouble("DX");
+    const double ds = input_db->getDouble("MFAC")*dx;
 	string elem_type = input_db->getString("ELEM_TYPE");
-	mesh.read("IBFE_Mesh2D_128.mat");
+	
+    mesh.read("IBFE_Mesh2D_128.mat");
 	mesh.prepare_for_use();
+    
         // Create major algorithm and data objects that comprise the
         // application.  These objects are configured from the input database
         // and, if this is a restarted run, from the restart database.
