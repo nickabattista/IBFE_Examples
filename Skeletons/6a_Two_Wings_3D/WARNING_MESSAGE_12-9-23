@@ -1,0 +1,34 @@
+******************************************************************************************
+*                   
+*                       WARNING MESSAGE UPON COMPILING: make main3d
+*
+*        It appears to be some issues with the "postprocess_data" function
+*
+*****************************************************************************************
+
+[battistn@login001 6a_Two_Wings_3D]$ make main3d
+
+Consolidate compiler generated dependencies of target main3d
+[ 50%] Building CXX object CMakeFiles/main3d.dir/main.cpp.o
+/home/hpc/battistn/IBFE_Examples/6a_Two_Wings_3D/main.cpp: In function ?void postprocess_data(SAMRAI::tbox::Pointer<SAMRAI::hier::PatchHierarchy<3> >, SAMRAI::tbox::Pointer<IBAMR::
+INSHierarchyIntegrator>, libMesh::Mesh&, libMesh::EquationSystems*, int, double, const string&)?:
+/home/hpc/battistn/IBFE_Examples/6a_Two_Wings_3D/main.cpp:670:77: warning: ?IBAMR::FEMechanicsBase::FORCE_SYSTEM_NAME? is deprecated: Use FEMechanicsBase::getForceSystemName() to a
+ccess the current force system name. [-Wdeprecated-declarations]
+  670 |         System& F_system = equation_systems->get_system<System>(IBFEMethod::FORCE_SYSTEM_NAME);
+      |                                                                             ^~~~~~~~~~~~~~~~~
+In file included from /home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/include/ibamr/IBFEMethod.h:25,
+                 from /home/hpc/battistn/IBFE_Examples/6a_Two_Wings_3D/main.cpp:53:
+/home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/include/ibamr/FEMechanicsBase.h:69:30: note: declared here
+   69 |     static const std::string FORCE_SYSTEM_NAME;
+      |                              ^~~~~~~~~~~~~~~~~
+/home/hpc/battistn/IBFE_Examples/6a_Two_Wings_3D/main.cpp:670:77: warning: ?IBAMR::FEMechanicsBase::FORCE_SYSTEM_NAME? is deprecated: Use FEMechanicsBase::getForceSystemName() to a
+ccess the current force system name. [-Wdeprecated-declarations]
+  670 |         System& F_system = equation_systems->get_system<System>(IBFEMethod::FORCE_SYSTEM_NAME);
+      |                                                                             ^~~~~~~~~~~~~~~~~
+In file included from /home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/include/ibamr/IBFEMethod.h:25,
+                 from /home/hpc/battistn/IBFE_Examples/6a_Two_Wings_3D/main.cpp:53:
+/home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/include/ibamr/FEMechanicsBase.h:69:30: note: declared here
+   69 |     static const std::string FORCE_SYSTEM_NAME;
+      |                              ^~~~~~~~~~~~~~~~~
+[100%] Linking CXX executable main3d
+[100%] Built target main3d
