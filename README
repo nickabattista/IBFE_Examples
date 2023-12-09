@@ -122,8 +122,11 @@
         //#include <IBAMR_config.h>
         //#include <IBTK_config.h>
 
-    [3] make sure following following modification was made (~line 370):
+    [3] make sure following following modification is made:
 
         // From circa 2016 UNC version --> autoibamr (Dec 2023) version!
         //AutoPtr<ExodusII_IO> exodus_io(uses_exodus ? new ExodusII_IO(mesh) : NULL);
-        std::unique_ptr<ExodusII_IO> exodus_io(uses_exodus ? new ExodusII_IO(mesh) : NULL);                
+        std::unique_ptr<ExodusII_IO> exodus_io(uses_exodus ? new ExodusII_IO(mesh) : NULL);     
+
+        NOTE: for multiple meshes, be sure to update from Mesh to MeshBase accordingly
+              (for an example, check out 5a_Multiple_Moving_2D_Plates)
