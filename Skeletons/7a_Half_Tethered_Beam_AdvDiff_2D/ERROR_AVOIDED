@@ -1,0 +1,61 @@
+
+*******************************************************************************************************
+*
+*                                   ERROR AVOIDED:
+*  NAB (Dec 2023): I needed to tell SAMRAI to include more patches; 
+*                  i.e., increase maximum patch data component indices
+*       See: https://github.com/IBAMR/IBAMR/blob/master/examples/IBLevelSet/ex0/example.cpp#L331-L332
+*       From discussion in IBAMR Google Group (https://groups.google.com/g/ibamr-users/c/Y60vMEymyEw)
+*
+*******************************************************************************************************
+
+
+                                    ERROR MESSAGE:
+
+
+
+IBFEMethod: mesh part 0 is using FIRST order LAGRANGE finite elements.
+Writing visualization files...
++++++++++++++++++++++++++++++++++++++++++++++++++++
+At beginning of timestep # 0
+Simulation time is 0
+P=00000:Program abort called in file ``/home/hpc/battistn/autoibamr/packages/SAMRAI-2.4.4/include/PatchDescriptor.C'' at line 77
+P=00000:ERROR MESSAGE:
+P=00000:PatchDescriptor::definePatchDataComponent error...
+P=00000:No available patch data component indices left.
+P=00000:Application must be restarted and size must be increased.
+P=00000:See tbox::SAMRAIManager utility for more information.
+P=00000:
+[node072:547118] *** Process received signal ***
+[node072:547118] Signal: Aborted (6)
+[node072:547118] Signal code:  (-6)
+[node072:547118] [ 0] /lib64/libpthread.so.0(+0x12cf0)[0x7f3453ed2cf0]
+[node072:547118] [ 1] /lib64/libc.so.6(gsignal+0x10f)[0x7f34528f9acf]
+[node072:547118] [ 2] /lib64/libc.so.6(abort+0x127)[0x7f34528ccea5]
+[node072:547118] [ 3] /home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/lib64/libIBTK2d.so(+0x20e869)[0x7f3459310869]
+[node072:547118] [ 4] ./main2d(_ZN6SAMRAI4hier15PatchDescriptorILi2EE24definePatchDataComponentERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEENS_4tbox7PointerINS0_16PatchDa
+taFactoryILi2EEEEE+0x19c)[0x48555c]
+[node072:547118] [ 5] ./main2d(_ZN6SAMRAI4hier16VariableDatabaseILi2EE28registerClonedPatchDataIndexENS_4tbox7PointerINS0_8VariableILi2EEEEEi+0x2ec)[0x48861c]
+[node072:547118] [ 6] /home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/lib64/libIBAMR2d.so(_ZNK6SAMRAI4solv16SAMRAIVectorRealILi2EdE11cloneVectorERKNSt7__cxx1112basic_stringIcSt1
+1char_traitsIcESaIcEEE+0x219)[0x7f345a1dc1e9]
+[node072:547118] [ 7] /home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/lib64/libIBTK2d.so(_ZN4IBTK21PETScSAMRAIVectorReal19VecDuplicate_SAMRAIEP6_p_VecPS2_+0x3f)[0x7f34595e693f]
+[node072:547118] [ 8] /home/hpc/battistn/autoibamr/packages/petsc-3.17.5/lib/libpetsc.so.3.17(VecDuplicate+0xa)[0x7f34566f5bba]
+[node072:547118] [ 9] /home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/lib64/libIBTK2d.so(_ZN4IBTK21PETScSAMRAIVectorReal23VecDuplicateVecs_SAMRAIEP6_p_VeciPPS2_+0x6f)[0x7f34595e
+286f]
+[node072:547118] [10] /home/hpc/battistn/autoibamr/packages/petsc-3.17.5/lib/libpetsc.so.3.17(VecDuplicateVecs+0xa)[0x7f34566f5dfd]
+[node072:547118] [11] /home/hpc/battistn/autoibamr/packages/petsc-3.17.5/lib/libpetsc.so.3.17(KSPCreateVecs+0xa0)[0x7f3456f3d8fd]
+[node072:547118] [12] /home/hpc/battistn/autoibamr/packages/petsc-3.17.5/lib/libpetsc.so.3.17(+0xa11343)[0x7f3456e5b343]
+[node072:547118] [13] /home/hpc/battistn/autoibamr/packages/petsc-3.17.5/lib/libpetsc.so.3.17(+0xa12527)[0x7f3456e5c527]
+[node072:547118] [14] /home/hpc/battistn/autoibamr/packages/petsc-3.17.5/lib/libpetsc.so.3.17(+0xae6944)[0x7f3456f30944]
+[node072:547118] [15] /home/hpc/battistn/autoibamr/packages/petsc-3.17.5/lib/libpetsc.so.3.17(KSPSolve+0x13)[0x7f3456f33103]
+[node072:547118] [16] /home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/lib64/libIBTK2d.so(_ZN4IBTK23PETScKrylovLinearSolver11solveSystemERN6SAMRAI4solv16SAMRAIVectorRealILi2EdEES
+5_+0x251)[0x7f345968d161]
+[node072:547118] [17] /home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/lib64/libIBAMR2d.so(_ZN5IBAMR31INSStaggeredHierarchyIntegrator18integrateHierarchyEddi+0x10a)[0x7f345a23bb7
+a]
+[node072:547118] [18] /home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/lib64/libIBAMR2d.so(_ZN5IBAMR29IBExplicitHierarchyIntegrator18integrateHierarchyEddi+0x8ea)[0x7f345a39ef6a]
+[node072:547118] [19] /home/hpc/battistn/autoibamr/packages/IBAMR-0.13.0/lib64/libIBTK2d.so(_ZN4IBTK19HierarchyIntegrator16advanceHierarchyEd+0x5ba)[0x7f34596d992a]
+[node072:547118] [20] ./main2d[0x45b85e]
+[node072:547118] [21] /lib64/libc.so.6(__libc_start_main+0xe5)[0x7f34528e5d85]
+[node072:547118] [22] ./main2d[0x45cdae]
+[node072:547118] *** End of error message ***
+/var/spool/slurm/d/job1599715/slurm_script: line 19: 547118 Aborted                 (core dumped) ./main2d input2d
