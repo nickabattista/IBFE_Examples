@@ -8,6 +8,8 @@
 *   Currently (and only slightly modified) by NAB for use with TCNJ's ELSA
 *         after installing using "autoibamr"
 *
+*    ---> Examples last tested for autoibamr version: IBAMR v0.13.0 <---
+*
 *   AUTOIBAMR: https://github.com/IBAMR/autoibamr/blob/master/README.md
 *   IBAMR:     https://ibamr.github.io/
 *
