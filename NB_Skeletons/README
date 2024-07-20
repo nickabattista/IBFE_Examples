@@ -1,0 +1,33 @@
+                                README: 
+            
+          -examples created for autoibamr (version: IBAMR v0.13.0)
+               GITHUB: https://github.com/IBAMR/autoibamr/releases
+          
+          -ran on TCNJ's HPC (uses a SLURM workload manager)
+
+--------------------------------------------------------------------------
+
+EXAMPLE: 1_Single_Piston_Vortex_2D
+
+    -> Uses 3 meshes to form a 'rectangularly' shaped piston (top, bottom, side)
+
+    -> Vertical side piece translates left-to-right between horzontal top and bottom
+         using a target point formulation
+
+    -> Only pumps onced to produce a single shooting vortex
+
+    -> Finite Element Meshes created w/ Coreform-Cubit-2024.3
+    
+--------------------------------------------------------------------------
+
+EXAMPLE: 2_Dual_Pistons_Colliding_Vortices_3D
+
+    -> 2 pistons aimed at each other; each will launch a vortex at the other
+    
+    -> Uses 4 meshes: 
+               Left Piston:    (i) round piston channel, (ii) circular plug
+               Right Piston: (iii) round piston channel, (iv) circular plug
+               
+    -> In each piston, the plug moves either left-to-right or right-to-left
+
+    -> Finite Element Meshes created w/ Coreform-Cubit-2024.3

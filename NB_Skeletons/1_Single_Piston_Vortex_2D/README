@@ -1,0 +1,42 @@
+README:
+
+[1] Vorticity Thresholding:
+
+        vorticity_abs_thresh <-- regrids when VORT > threshold value
+        
+        vorticity_rel_thresh <-- regrids when VORT > percent of max vorticity
+
+
+[2] DOMAIN SIZE / RESOLUTION: Max resolution at finest level "512x512"
+
+       --> MODIFIED FROM SQUARE GRID on [-1/2,1/2]x[-1/2,1/2], e.g., 
+
+            CartesianGeometry {
+                domain_boxes = [ (0,0),(N-1,N-1) ]
+                x_lo = -.5*L,-.5*L
+                x_up = .5*L,.5*L
+                periodic_dimension = 1,1
+            }
+    
+                                *** TO ***
+
+            RECTANGULAR GRID on [-0.5,1.5]x[-0.25,0.25]
+
+            CartesianGeometry {
+                domain_boxes = [ (0,0),(2*N - 1,N/2 - 1) ]
+                x_lo = -.5*L,-.25*L
+                x_up = 1.0*L,.25*L
+                periodic_dimension = 1,1
+            }
+
+      --> IN ORDER TO CHANGE THAT, WE MODIFIED THE PATCH SIZES:
+
+            largest_patch_size {
+                 // Originally set at 512,512
+                 level_0 = 768,256  // all finer levels will use same values as level_0
+            }
+            smallest_patch_size {
+                 // Originally set at 64,64
+                 level_0 =  8,8 //48,16  // all finer levels will use same values as level_0
+            }
+        
